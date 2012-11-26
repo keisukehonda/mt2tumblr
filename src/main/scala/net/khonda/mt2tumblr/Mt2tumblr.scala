@@ -1,4 +1,4 @@
-package net.khonda
+package net.khonda.mt2tumblr
 
 import akka.actor._
 import akka.pattern.ask

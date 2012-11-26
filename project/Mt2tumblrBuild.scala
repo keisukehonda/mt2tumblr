@@ -12,7 +12,11 @@ object Mt2tumblrBuild extends Build {
       version := "0.1-SNAPSHOT",
       scalaVersion := "2.9.2",
       resolvers += "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases",
-      libraryDependencies += "com.typesafe.akka" % "akka-actor" % "2.0.4"
+      libraryDependencies ++= Seq(
+	"com.typesafe.akka" % "akka-actor" % "2.0.4",
+	"com.github.scala-incubator.io" %% "scala-io-core" % "0.4.1",
+	"com.github.scala-incubator.io" %% "scala-io-file" % "0.4.1"
+      )
     )
   )
 }
