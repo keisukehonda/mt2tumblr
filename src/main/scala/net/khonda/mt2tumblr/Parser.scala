@@ -10,12 +10,19 @@ object Parser {
 
 class Parser(file: String) {
   
-  val s = Source.fromFile(file, "UTF-8")
+  def read(start: Int): (Int, Blog) = {
+    val source = Source.fromFile(file, "UTF-8")
+    val block = source.getLines.drop(start).takeWhile(_ != "--------").toList
+    val blocksize = block.length
+    
+    try {                  
+      
+      for (line <- block) { println(line) }
 
-  def read: Unit = {
-    try {
-      for (line <- s.getLines) { println(line) }
-    } finally { s.close }
+    } finally { source.close }    
+    val blog = Blog("title", "category", "date", "body")    
+    (start+blocksize, blog)
+
   }
 
 }
