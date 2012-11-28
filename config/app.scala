@@ -5,5 +5,10 @@ import akka.util.Duration
 
 new Mt2tumblr {
   val datapath = "./data/keisukeblog.txt"
+  val cons_key =  "String"
+  val cons_secret = "String"
+  val username = "String"
+  val password = "String"
+  val hostname = "String"
 }
 

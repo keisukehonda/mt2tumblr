@@ -6,9 +6,18 @@ import akka.routing.RoundRobinRouter
 import akka.util.duration._
 import akka.util.Timeout
 import com.twitter.util.Eval
+import dispatch._
+import dispatch.oauth.OAuth._
+import dispatch.oauth.{ OAuth, Consumer }
 import java.io.File
 import net.khonda.mt2tumblr.config.{Mt2tumblr => Mt2tumblrConfig}
 import scalax.file.Path
+
+
+object Tumblr {
+  val api = :/("api.tumblr.com") / "v2" / "blog"
+  val oauth = :/("www.tumblr.com") / "oauth"
+}
 
 object Mt2tumblr extends App {
  
