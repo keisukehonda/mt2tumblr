@@ -27,7 +27,7 @@ object Mt2tumblr extends App {
   case class Summary
 
   class Worker extends Actor {
-    //post one blog content to tumbler
+    //post one blog content to tumbler using dipatch
     def postBlog(blog: Blog) = {
       println(blog)
       Result(1, true)
@@ -61,8 +61,18 @@ object Mt2tumblr extends App {
     //create master
     val master = system.actorOf(Props(new Master(nrOfWorkers)), name = "master")
 
-    //loop for submiting whole blog data
+    //loop for submiting whole blog data    
+    def submit(startLine: Int): Unit = {
+      val res = parser.read(startLine)
+      if(res._1 != -1) {
+	val nextLine = res._1+1
+	submit(nextLine)
+      }
+    }
+    submit(0)
     
+    //fnish submiting and summary result
+    master ! Summary
 
   }
 }

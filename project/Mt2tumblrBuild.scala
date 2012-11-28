@@ -19,6 +19,9 @@ object Mt2tumblrBuild extends Build {
 	"com.typesafe.akka" % "akka-actor" % "2.0.4",
 	"com.github.scala-incubator.io" %% "scala-io-core" % "0.4.1",
 	"com.github.scala-incubator.io" %% "scala-io-file" % "0.4.1",
+        "net.databinder" %% "dispatch-http" % "0.8.8",
+	"net.databinder" %% "dispatch-http-json" % "0.8.8",
+	"net.databinder" %% "dispatch-oauth" % "0.8.8",
 	"com.twitter" % "util-eval"   % "5.3.13"
       )
     )
