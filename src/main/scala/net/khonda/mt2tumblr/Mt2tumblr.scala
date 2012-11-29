@@ -52,11 +52,11 @@ object Mt2tumblr extends App {
     val http = new Http
     
     //post one blog content to tumbler using dipatch
-    def postBlog(blog: Blog) = {      
+    def postBlog(blog: Blog) = {  
+      println("submit: "+blog.id)
       val post_params = Map("type" -> "text", "title" -> blog.title, "body" -> blog.body, "date" ->blog.date)
       val post_handler = Tumblr.api / hostname / "posts" / "queue" << post_params <@ (consumer, access_token) >|
-      println("posting:"+blog.id)
-      val res = http(post_handler)      
+      val res = http(post_handler)
       Result(blog.id, true)           
     }
 
