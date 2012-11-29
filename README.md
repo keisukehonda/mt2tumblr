@@ -1,12 +1,12 @@
 # mt2tumblr
-is convert tool for blog data from MT4 to tumblr.
+is convert tool for blog data from MT4 to tumblr.  
 This tool based on Akka for posting.
 
 
 ## Build & Usage
 clone  
 sbt compile  
-edit ./app.scala filer 
+edit config/app.scala file 
  
     val datapath = "MT EXPORT FILE PATH"
     val cons_key =  "YOUR CONSUMER KYE"
