@@ -4,15 +4,17 @@ This tool based on Akka for posting.
 
 
 ## Build & Usage
-clone 
-sbt compile
+clone  
+sbt compile  
 edit ./app.scala filer 
+ 
     val datapath = "MT EXPORT FILE PATH"
     val cons_key =  "YOUR CONSUMER KYE"
     val cons_secret = "YOUR CONSUMER SECRET"
     val username = "YOUR ACCOUNT NAME"
     val password = "PASSWORD"
     val hostname = "BLOG HOSTNAME"
+
 sbt run
 
 ## Notes
