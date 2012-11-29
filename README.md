@@ -1,9 +1,11 @@
 # mt2tumblr
 is convert tool for blog data from MT4 to tumblr.  
 This tool based on Akka for posting.
-
+[Test site](http://mt2test.tumblr.com) is updated contents useing this (Japanese).
 
 ## Build & Usage
+sbt launcher version is 0.12.1  
+
 clone  
 sbt compile  
 edit config/app.scala file 
@@ -44,5 +46,3 @@ this tool enables MT4 export file which format as blelow
     KEYWORDS:
     
     -----
-
-
