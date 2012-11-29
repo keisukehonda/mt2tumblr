@@ -4,11 +4,13 @@ import com.twitter.conversions.storage._
 import akka.util.Duration
 
 new Mt2tumblr {
-  val datapath = "./data/keisukeblog.txt"
-  val cons_key =  "String"
-  val cons_secret = "String"
-  val username = "String"
-  val password = "String"
-  val hostname = "String"
+
+  val datapath = "MT EXPORT FILE PATH"
+  val cons_key =  "YOUR CONSUMER KYE"
+  val cons_secret = "YOUR CONSUMER SECRET"
+  val username = "YOUR ACCOUNT NAME"
+  val password = "PASSWORD"
+  val hostname = "BLOG HOSTNAME"
+
 }
 

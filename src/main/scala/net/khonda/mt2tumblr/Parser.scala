@@ -11,6 +11,7 @@ object Parser {
 
 class Parser(file: String) {
   
+  val basenamePattern = """(^BASENAME: )(.+)""".r
   val titlePattern = """(^TITLE: )(.+)""".r
   val primarycategoryPattern = """(^PRIMARY CATEGORY: )(.+)""".r
   val categoryPattern = """(^CATEGORY: )(.+)""".r
@@ -24,14 +25,15 @@ class Parser(file: String) {
     val source = Source.fromFile(file, "UTF-8")
     val block = source.getLines.drop(start).takeWhile(_ != "--------").toList
     val blocksize = block.length
-    var author = ""
+    var id = ""
     var title: String = "";  var category: String = "";  var date: String = "";  
     val body = new StringBuilder()
     
     try {                      
       for (line <- block) {
-	line match {	 
-	  case titlePattern(p,b) => title = b	
+	line match {	
+	  case basenamePattern(p,b) => id = b
+	  case titlePattern(p,b) => title = b
 	  case primarycategoryPattern(p,b) => 
 	  case categoryPattern(p,b) => category = b
 	  case datePattern(p,b) => date = b	  
@@ -41,10 +43,8 @@ class Parser(file: String) {
 	  case _ => body.append(line)
 	}	
       }
-    } finally { source.close }    
-    println("body")
-    println(body.toString)
-    val blog = Blog(title, category, date, body.toString)        
+    } finally { source.close }
+    val blog = Blog(id, title, category, date, body.toString)
     (if(blocksize < 1) -1 else start+blocksize, blog)
 
   }
