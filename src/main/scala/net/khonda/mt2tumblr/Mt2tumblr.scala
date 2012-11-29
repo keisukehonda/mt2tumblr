@@ -22,6 +22,8 @@ object Tumblr {
 }
 
 object Mt2tumblr extends App {
+
+  val nrOfLimitCall: Int = 240
  
   val config = Eval[Mt2tumblrConfig](new File("./config/app.scala"))
   val consumer = Consumer(config.cons_key, config.cons_secret)
@@ -46,7 +48,7 @@ object Mt2tumblr extends App {
 
   case class Post(blog: Blog)
   case class Result(id: String, success: Boolean)
-  case class Summary
+  case class Summary(id: String)
 
   class Worker extends Actor {
     val http = new Http
@@ -55,7 +57,7 @@ object Mt2tumblr extends App {
     def postBlog(blog: Blog) = {  
       println("submit: "+blog.id)
       val post_params = Map("type" -> "text", "title" -> blog.title, "body" -> blog.body, "date" ->blog.date)
-      val post_handler = Tumblr.api / hostname / "posts" / "queue" << post_params <@ (consumer, access_token) >|
+      val post_handler = Tumblr.api / hostname / "post" << post_params <@ (consumer, access_token) >|
       val res = http(post_handler)
       Result(blog.id, true)           
     }
@@ -77,10 +79,10 @@ object Mt2tumblr extends App {
       case Post(blog) => workerRouter ! Post(blog)
       case Result(id, success) => {			
 	results += (id -> success)
-	if(!success) self ! Summary
+	if(!success || results.keys.size == nrOfLimitCall) self ! Summary
       }
-      case Summary => {
-	println("finish: "+results.keys.size)
+      case Summary(id) => {
+	println("finish: "+results.keys.size+"last blog id: "+id)
 	context.system.shutdown()
       }
     }
@@ -109,7 +111,7 @@ object Mt2tumblr extends App {
     submit(0)
     
     //fnish submiting and summary result
-    master ! Summary
+    system.shutdown()
 
   }
 
