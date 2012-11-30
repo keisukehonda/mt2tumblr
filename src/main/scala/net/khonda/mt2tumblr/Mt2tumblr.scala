@@ -1,3 +1,4 @@
+
 package net.khonda.mt2tumblr
 
 import akka.actor._
@@ -79,7 +80,7 @@ object Mt2tumblr extends App {
       case Post(blog) => workerRouter ! Post(blog)
       case Result(id, success) => {			
 	results += (id -> success)
-	if(!success || results.keys.size == nrOfLimitCall) self ! Summary
+	if(!success || results.keys.size == nrOfLimitCall) self ! Summary(id)
       }
       case Summary(id) => {
 	println("finish: "+results.keys.size+"last blog id: "+id)
@@ -108,8 +109,7 @@ object Mt2tumblr extends App {
 	submit(nextLine)
       }
     }
-    submit(0)
-    
+    submit(0)    
     //fnish submiting and summary result
     system.shutdown()
 
